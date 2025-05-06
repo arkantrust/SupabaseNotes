@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -37,11 +40,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.ddulce.supabasenotes.ui.theme.SupabaseNotesTheme
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
 import io.github.jan.supabase.postgrest.from
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,8 +105,9 @@ fun NotesList(innerPadding: PaddingValues) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(14.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             OutlinedTextField(
                 value = newNote,
@@ -113,6 +116,7 @@ fun NotesList(innerPadding: PaddingValues) {
                 modifier = Modifier.weight(1f)
             )
             Button(
+                modifier = Modifier.padding(top = 8.dp),
                 onClick = {
                     if (newNote.isBlank()) {
                         return@Button
